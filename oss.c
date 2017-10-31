@@ -23,6 +23,8 @@
 #define INITIAL_VALUE 1
 #define CHILD_PROGRAM "./user"
 
+//function declarations
+
 void ChildProcess(void);
 void ctrlPlusC(int sig);
 int rand02(void);
