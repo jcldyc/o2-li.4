@@ -15,6 +15,7 @@ typedef struct processControlBlock{
   int totCPUTime;
   int totSysTime;
   int prevBurstTime;
+  int queue;
 }PCB;
 
 
@@ -44,9 +45,9 @@ int main(int argc, char * argv[]){
 
 
    for(int i = 0;i<18;i++){
-   	printf("PCB#: %d\n", shmPtr->PCB[i].totCPUTime);
+   	printf("PCB#: %d \t cpuTime: %d\n", shmPtr->PCB[i].queue, shmPtr->PCB[i].totCPUTime);
    }
-
+   shmdt(shmPtr);
    return 0;
 
 }

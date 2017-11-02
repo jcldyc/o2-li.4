@@ -1,23 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void print(int *a);
+void printMe(struct shmData pcb);
 void qOne(int index, int *array);
 void insertShift(int start, int end, int *array);
 
+typedef struct processControlBlock{
+	int queue;	
+	int totCPUTime;
+  int totSysTime;
+  int prevBurstTime;
+}PCB;
+
+typedef struct ShmData{             //struct used to hold the seconds, nanoseconds, and shmMsg and reference in shared memory
+  int seconds;
+  int nanoseconds;
+  struct processControlBlock PCB[18];
+}shmData;
+
 int main(int argc, char *argv[]){
 	int  array[8]= {0, 0, 0, 1, 1, 1, 2, 2};
-	print(array);
-	int z = 1;
-	int q = 2;
-	qOne(z, array);
-	printf("-----------------------------------------------------------\n");
-	print(array);
 
-	printf("-----------------------------------------------------------\n");
 
-	qOne(q, array);
-	print(array);
+	  for(int i = 0;i<18;i++){
+	  	shmData.PCB[i].totCPUTime = i;
+	  }
+	
+	printMe(shmData);
+	// int z = 1;
+	// int q = 2;
+	// qOne(z, array);
+	// printf("-----------------------------------------------------------\n");
+	// print(array);
+
+	// printf("-----------------------------------------------------------\n");
+
+	// qOne(q, array);
+	// print(array);
 
 	//move array[0] to the end of q1
 
@@ -25,7 +44,7 @@ int main(int argc, char *argv[]){
 
 
 
-void print(int *a){
+void printMe(struct ShmData pcb){
 	// for(int i=0;i<5;i++){
 	// 	printf("%d\n", a[i]);
 	// }
@@ -41,8 +60,8 @@ void print(int *a){
 	// 		i++;
 	// 	}	
 	// }
-	for(int x =0; x<8;x++){
-		printf("array[%d] = %d\n", x, a[x]);
+	for(int x =0; x<18;x++){
+		printf("array[%d] = %d\n", x, pcb[x].PCB.totCPUTime);
 	}
 }
 
@@ -68,6 +87,6 @@ void insertShift(int start,int end, int *array){
 	for(int x = start;x<=end;x++){
 		array[x] = array[x+1];
 	}
-	intHolder = 2;
+	intHolder = 1;
 	array[end] = intHolder;
 }

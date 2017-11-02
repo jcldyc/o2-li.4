@@ -1,4 +1,4 @@
-CC = gcc -std=gnu99 -lpthread
+CC = gcc -std=gnu99 -pthread
 SRCS = $(wildcard *.c)
 PROGS = $(patsubst %.c,%,$(SRCS))
 all: $(PROGS)
