@@ -122,6 +122,8 @@ int main(int argc, char *argv[]){
 
   if(runIt){
 
+    printf("size of shm: %d\n", (int)sizeof(shm));
+
     //only creates the shared memory if the program runs through for(runIt)
       id = shmget(shmKey,sizeof(shm), IPC_CREAT | 0666);
       if (id < 0){

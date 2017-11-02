@@ -55,16 +55,16 @@ int main(int argc, char * argv[]){
        exit(1);
    }
 
-	// if ((id = shmget(shmKey,sizeof(shm), IPC_CREAT | 0666)) < 0){
- //       perror("SHMGET:User");
- //       exit(1);
- //   }
+	if ((id = shmget(shmKey,sizeof(shm), IPC_CREAT | 0666)) < 0){
+       perror("SHMGET:User");
+       exit(1);
+   }
 
-   id = shmget(shmKey,sizeof(shm), IPC_CREAT | 0666);
-      if (id < 0){
-        perror("SHMGET:User");
-        exit(1);
-      }
+   // id = shmget(shmKey,sizeof(shm), IPC_CREAT | 0666);
+   //    if (id < 0){
+   //      perror("SHMGET:User");
+   //      exit(1);
+   //    }
 
    if((shmPtr = shmat(id, NULL, 0)) == (shmData *) -1){
        perror("SHMAT");
